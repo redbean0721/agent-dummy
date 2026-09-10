@@ -21,7 +21,7 @@ jobs:
 
     - name: Compile Minimal Stub
       run: |
-        cl.exe /Oi /O2 /GS- stub.c /link /NODEFAULTLIB /ENTRY:stub /SUBSYSTEM:WINDOWS kernel32.lib /OUT:stub.exe
+        cl.exe /Oi /O2 /GS- stub.c /link /NODEFAULTLIB /ENTRY:stub /SUBSYSTEM:CONSOLE kernel32.lib /OUT:stub.exe
       shell: cmd
 
     - name: Upload Build Artifacts
