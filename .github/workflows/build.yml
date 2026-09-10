@@ -1,0 +1,31 @@
+name: Build C Stub
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup MSVC Developer Command Prompt
+      uses: ilammy/msvc-dev-cmd@v1
+      with:
+        arch: amd64
+
+    - name: Compile Minimal Stub
+      run: |
+        cl.exe /Oi /O2 /GS- /NODEFAULTLIB stub.c /link /ENTRY:stub /SUBSYSTEM:WINDOWS /OUT:stub.exe
+      shell: cmd
+
+    - name: Upload Build Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: Minimal-C-Stub-Release
+        path: stub.exe
